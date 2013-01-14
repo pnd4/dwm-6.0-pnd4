@@ -1,0 +1,54 @@
+--- ./src/dwm-6.0/dwm.c	2013-01-13 23:58:37.476312416 -0800
++++ ../dwm-unia-pnd4-jan13/src/dwm-6.0/dwm.c	2013-01-14 00:05:11.269116319 -0800
+@@ -273,6 +273,8 @@
+ static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
++static void toggletag(const Arg *arg);
++static void toggleview(const Arg *arg);
+ static void unfocus(Client *c, Bool setfocus);
+ static void unmanage(Client *c, Bool destroyed);
+ static void unmapnotify(XEvent *e);
+@@ -1969,6 +1971,42 @@
+ }
+ 
+ void
++toggletag(const Arg *arg) {
++	unsigned int i, newtags;
++
++	if(!selmon->sel)
++		return;
++	newtags = selmon->sel->tags ^ (arg->ui & TAGMASK);
++	if(newtags) {
++		selmon->sel->tags = newtags;
++		if(newtags == ~0) {
++			selmon->prevtag = selmon->curtag;
++			selmon->curtag = 0;
++		}
++		if(!(newtags & 1 << (selmon->curtag - 1))) {
++			selmon->prevtag = selmon->curtag;
++			for (i=0; !(newtags & 1 << i); i++);
++			selmon->curtag = i + 1;
++		}
++		selmon->sel->tags = newtags;
++		selmon->lt[selmon->sellt] = selmon->lts[selmon->curtag];
++		focus(NULL);
++		arrange(selmon);
++	}
++}
++
++void
++toggleview(const Arg *arg) {
++	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
++
++	if(newtagset) {
++		selmon->tagset[selmon->seltags] = newtagset;
++		focus(NULL);
++		arrange(selmon);
++	}
++}
++
++void
+ unfocus(Client *c, Bool setfocus) {
+ 	if(!c)
+ 		return;
