@@ -40,7 +40,7 @@ build() {
   install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
 }
 md5sums=('8bb00d4142259beb11e13473b81c0857'
-         'c513ba9626afb49dd0f5f641cf04e607'
+         '129a83c38869cd8e06761cdaedba2df3'
          '10115ccd48a28c7b6bc167257d0c0fb7'
          '0fd771ad51b80c3872c9080bd15f6eea'
          '98d34f02105cf2497d5d1db1b75bd317'
@@ -52,5 +52,4 @@ md5sums=('8bb00d4142259beb11e13473b81c0857'
          '540f33b708c230fbabac202dcc03ade1'
          'd87223a0c056e59a0dd6a5fba5d0c745'
          'cd20ba50cf16f2cbeea864f99214d485'
-#				 'd7e9afca94adb7b4c634cd3fd7dfcbdc'
          'b8de5bdd45e3736cf2e6b0277301e196')

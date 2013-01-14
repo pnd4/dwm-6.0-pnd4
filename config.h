@@ -11,18 +11,13 @@ static const char font[]			= "Inconsolata:style=bold:size=10:antialias=true:hint
 #define NUMCOLORS 4
 static const char colors[NUMCOLORS][ColLast][9] = {
 	/* border   foreground  background */
-    /* gaia2 */
-    //{ "#A3CDC8", "#F9F9F9", "#6D9F99" }, // 1 = normal
-    //{ "#FDBE45", "#FFA905", "#6D9F99" }, // 2 = selected
-    //{ "#F54844", "#F54844", "#6D9F99" }, // 3 = urgent
-    //{ "#93C724", "#93C724", "#6D9F99" }, // 4 = occupied
-	{ "#000000", "#020202", "#000000" }, // 1 = normal -> grey on black
+	{ "#000000", "#bbbbbb", "#000000" }, // 1 = normal -> grey on black
 	{ "#005577", "#000000", "#005577" }, // 2 = selected -> black/blue on black
 	{ "#39ff14", "#dc143c", "#000000" }, // 3 = urgent -> green border
 	{ "#000000", "#5f8787", "#000000" }, // 4 = occupied ->
 };
-static const unsigned int statusmon = 1; // On which monitor should the status appear
-static const unsigned int systrayspacing	= 0;	// Systray spacing
+static const unsigned int statusmon = 0; // On which monitor should the status appear
+static const unsigned int systrayspacing	= 1;	// Systray spacing
 static const unsigned int borderpx				= 2;	// Border pixel of windows
 static const unsigned int gappx						= 2;	// Gap pixel between windows
 static const unsigned int snap						= 10;	// Snap pixel
@@ -52,20 +47,19 @@ static const Tag tags[] = {
 	{ "irsi",	&layouts[1], -1,		1 },
 	{ "mpvi",	&layouts[0], -1,		1 },
 	{ "code",	&layouts[1], -1,		2 },
-	{ "scrat", 	&layouts[3], -1 -1},
 };
 
 /* rules */
 static const Rule rules[] = {
 	/*WM_CLASS		WM_CLASS	WM_NAME													Monitor '1' is left, '0' is right, '-1' is either */
 	/*class			instance	title				tags mask	isfloating	monitor */ 
-	{ "Chromium",	"chromium",	NULL,				1 << 1,			False,		 1},
-	{ NULL,				"weechat",  NULL,				1 << 2,			False,		 0},
-	{ NULL,  			"ncmpcpp",	NULL,				1 << 3,			False,		 0},
-	{ "MPlayer",	NULL,				NULL,				1 << 3,			False,		 1},
-	{ "Gimp",			NULL,				NULL,				1 << 4,			False,		 1},
-	{ "Evince",		NULL,				NULL,				1 << 4,			False,		 1},
-	{ "URxvt",		"Scratchpad",	NULL,			1 << 5,			True,				 -1}, /* scratchpad in its own tag (6th) */
+	{ "Chromium",	"chromium",	NULL,				1 << 1,			False,		 0},
+	{ "Navigator","Iceweasel",NULL,				1 << 2,			False,		 0},
+	{ NULL,				"weechat",  NULL,				1 << 2,			False,		 1},
+	{ NULL,  			"ncmpcpp",	NULL,				1 << 3,			False,		 1},
+	{ "MPlayer",	NULL,				NULL,				1 << 3,			False,		 0},
+	{ "Gimp",			NULL,				NULL,				1 << 4,			False,		 0},
+	{ "Evince",		NULL,				NULL,				1 << 4,			False,		 0},
 };
 
 /* key definitions */
@@ -82,7 +76,6 @@ static const Rule rules[] = {
 
 /* commands */
 static const char *dmenu[]			= { "dmenu_run", "-p", "(!)", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char *scratchpadcmd[] = { "urxvtc", "-name", "Scratchpad", "-geometry", "74x15", NULL };
 static const char *term[]				= { "urxvtc", NULL };
 static const char *browser[]		= { "chromium", NULL };
 static const char *files[]			= { "spacefm", NULL };
@@ -105,8 +98,6 @@ static Key keys[] = {
 	{ MODKEY,								XK_p,								spawn,				{.v = dmenu } },
 	{ MODKEY,								XK_e,								spawn,				{.v = files } },
 	{ MODKEY,								XK_Return,					spawn,				{.v = term } },
-	{ MODKEY|ShiftMask,			XK_F1,							spawn,				{.v = scratchpadcmd } }, // launch scratchpad
-	{ MODKEY,								XK_F1,							toggleview,				{.ui = 1 << 5 } }, // toggles scratchpad, doesnt focus
 	{ MODKEY,								XK_F2,							spawn,				{.v = browser } },
 	{ MODKEY,								XK_F3,							spawn,				{.v = weechat } },
 	{ MODKEY,								XK_F4,							spawn,				{.v = music } },
