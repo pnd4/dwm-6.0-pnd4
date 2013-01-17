@@ -3,7 +3,6 @@
 
 /* appearance */
 
-
 /* font */
 static const char font[]			= "Inconsolata:style=bold:size=10:antialias=true:hinting=true";
 
@@ -11,10 +10,10 @@ static const char font[]			= "Inconsolata:style=bold:size=10:antialias=true:hint
 #define NUMCOLORS 4
 static const char colors[NUMCOLORS][ColLast][9] = {
 	/* border   foreground  background */
-	{ "#000000", "#bbbbbb", "#000000" }, // 1 = normal -> grey on black
-	{ "#005577", "#000000", "#005577" }, // 2 = selected -> black/blue on black
-	{ "#39ff14", "#dc143c", "#000000" }, // 3 = urgent -> green border
-	{ "#000000", "#5f8787", "#000000" }, // 4 = occupied ->
+	{ "#000000", "#bbbbbb", "#000000" }, // 1 = normal -> grey text, black border on black
+	{ "#005577", "#000000", "#005577" }, // 2 = selected -> black text, blue border, on black
+	{ "#39ff14", "#dc143c", "#000000" }, // 3 = urgent -> red text, black border, on black
+	{ "#000000", "#1b8be0", "#000000" }, // 4 = occupied -> blue text, black border, on black
 };
 static const unsigned int statusmon = 0; // On which monitor should the status appear
 static const unsigned int systrayspacing	= 1;	// Systray spacing
