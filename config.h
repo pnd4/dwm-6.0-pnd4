@@ -41,24 +41,24 @@ static const Layout layouts[] 						= {
 /* tagging */
 static const Tag tags[] = {
 	/* name		layout       mfact	nmaster */
-	{ "term",	&layouts[1], -1,		-1 },
-	{ "webb",	&layouts[2], -1,		1 },
-	{ "irsi",	&layouts[1], -1,		1 },
-	{ "mpvi",	&layouts[0], -1,		1 },
-	{ "code",	&layouts[1], -1,		2 },
+	{ "term",	&layouts[0], -1,		-1 },
+	{ "webb",	&layouts[1], -1,		 1 },
+	{ "irsi",	&layouts[1], -1,		-1 },
+	{ "mpvi",	&layouts[0], -1,		-1 },
+	{ "code",	&layouts[0], -1,		-1 },
 };
 
 /* rules */
 static const Rule rules[] = {
 	/*WM_CLASS		WM_CLASS	WM_NAME													Monitor '1' is left, '0' is right, '-1' is either */
 	/*class			instance	title				tags mask	isfloating	monitor */ 
-	{ "Chromium",	"chromium",	NULL,				1 << 1,			False,		 0},
-	{ "Navigator","Iceweasel",NULL,				1 << 2,			False,		 0},
-	{ NULL,				"weechat",  NULL,				1 << 2,			False,		 1},
-	{ NULL,  			"ncmpcpp",	NULL,				1 << 3,			False,		 1},
-	{ "MPlayer",	NULL,				NULL,				1 << 3,			False,		 0},
-	{ "Gimp",			NULL,				NULL,				1 << 4,			False,		 0},
-	{ "Evince",		NULL,				NULL,				1 << 4,			False,		 0},
+	{ "Chromium",	"chromium",	NULL,				1 << 1,			False,		 1},
+	{ "Navigator","Iceweasel",NULL,				1 << 2,			False,		 1},
+	{ NULL,				"weechat",  NULL,				1 << 2,			False,		 0},
+	{ NULL,  			"ncmpcpp",	NULL,				1 << 3,			False,		 0},
+	{ "MPlayer",	NULL,				NULL,				1 << 3,			False,		 1},
+	{ "Gimp",			NULL,				NULL,				1 << 4,			False,		 1},
+	{ "Evince",		NULL,				NULL,				1 << 4,			False,		 1},
 };
 
 /* key definitions */
@@ -74,12 +74,12 @@ static const Rule rules[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenu[]			= { "dmenu_run", "-p", "(!)", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
+static const char *dmenu[]			= { "dmenu_run", "-p", "(P!)", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *term[]				= { "urxvtc", NULL };
 static const char *browser[]		= { "chromium", NULL };
 static const char *files[]			= { "spacefm", NULL };
 static const char *music[]			= { "urxvtc", "-name", "ncmpcpp", "-e", "ncmpcpp", NULL };
-static const char *weechat[]		= { "urxvtc", "-name", "weechat", "-e", "weechat-curses", NULL };
+static const char *irc[]		= { "urxvtc", "-name", "weechat", "-e", "weechat-curses", NULL };
 static const char *scrot[]			= { "xfce4-screenshooter", NULL };
 //static const char *lock[]			= { "slock", NULL };
 //static const char *halt[]			= { "dmenu_shutdown", NULL };
@@ -96,10 +96,14 @@ static Key keys[] = {
 	/* modifier					key				 			function		argument */
 	{ MODKEY,								XK_p,								spawn,				{.v = dmenu } },
 	{ MODKEY,								XK_e,								spawn,				{.v = files } },
-	{ MODKEY,								XK_Return,					spawn,				{.v = term } },
+	{ MODKEY|ShiftMask,			XK_Return,					spawn,				{.v = term } },
 	{ MODKEY,								XK_F2,							spawn,				{.v = browser } },
-	{ MODKEY,								XK_F3,							spawn,				{.v = weechat } },
+	{ MODKEY,								XK_F3,							spawn,				{.v = irc } },
 	{ MODKEY,								XK_F4,							spawn,				{.v = music } },
+	{ MODKEY,								XK_F5,							spawn,				{.v = mpdplay } },
+	{ MODKEY,								XK_F6,							spawn,				{.v = mpdnext } },
+	{ MODKEY,								XK_F7,							spawn,				{.v = mpdprev } },
+	{ MODKEY,								XK_F8,							spawn,				{.v = mpdstop } },
 	{ MODKEY,								XK_Print,						spawn,				{.v = scrot } },
 	{ 0,						XF86XK_AudioRaiseVolume,		spawn,				{.v = volup } },
 	{ 0,						XF86XK_AudioLowerVolume,		spawn,				{.v = voldown } },
@@ -112,15 +116,15 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_q,								quit,					{0} },
 	{ MODKEY,								XK_Right,						focusstack,		{.i = +1 } },
 	{ MODKEY,								XK_Left,						focusstack,		{.i = -1 } },
-	{ MODKEY,								XK_F11,							zoom,					{0} },
+	{ MODKEY,								XK_space,						zoom,					{0} },
 	{ MODKEY,								XK_Tab,							view,					{0} },
+	{ MONKEY,								XK_Tab,							focusmon,			{0} },
 	{ MODKEY,								XK_c,								killclient,		{0} },
 	{ MODKEY,								XK_bracketleft,			setmfact,			{.f = -0.05} },
 	{ MODKEY,								XK_bracketright,		setmfact,			{.f = +0.05} },
 	{ MODKEY,								XK_equal,						incnmaster,		{.i = +1 } },
 	{ MODKEY,								XK_minus,						incnmaster,		{.i = -1 } },
-	{ MODKEY,								XK_space,						setlayout,		{0} },	// toggle last layout
-	{ MODKEY,								XK_f,								togglefloating,{0} },
+	{ MODKEY,								XK_space,						togglefloating,{0} },
 	{ MODKEY,								XK_t,								setlayout,		{.v = &layouts[0] } },
 	{ MODKEY,								XK_b,								setlayout,		{.v = &layouts[1] } },
 	{ MODKEY,								XK_m,								setlayout,		{.v = &layouts[2] } },
@@ -130,7 +134,7 @@ static Key keys[] = {
 	TAGKEYS(								XK_3,								2)
 	TAGKEYS(								XK_4,								3)
 	TAGKEYS(								XK_5,								4)
-	{ MODKEY,								XK_o,								view,					{.ui = ~0 } },
+	{ MODKEY,								XK_9,								view,					{.ui = ~0 } },
 	{ MODKEY|ShiftMask,			XK_a,								tag,					{.ui = ~0 } },
 	{ MONKEY,								XK_Left,						focusmon,			{.i = -1 } },
 	{ MONKEY,								XK_Right,						focusmon,			{.i = +1 } },
