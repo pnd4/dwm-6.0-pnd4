@@ -1,4 +1,18 @@
-/* See LICENSE file for copyright and license details. */
+/* PND4's DWM Config
+ *
+ * FOR USE WITH:
+ * alsa-utils
+ * chromium
+ * dmenu
+ * mplayer
+ * ncmpcpp
+ * mpd
+ * mpc
+ * spacefm
+ * xfce4-screenshooter
+ * uxrvt
+*/
+
 #include <X11/XF86keysym.h>
 
 /* appearance */
@@ -86,10 +100,10 @@ static const char *scrot[]			= { "xfce4-screenshooter", NULL };
 static const char *volup[]			= { "amixer", "-q", "sset", "Master", "5%+", "unmute", NULL };
 static const char *voldown[]		= { "amixer", "-q", "sset", "Master", "5%-", "unmute", NULL };
 static const char *volmute[]		= { "amixer", "-q", "sset", "Master", "toggle", NULL };
-static const char *mpdplay[]		= { "ncmpcpp", "toggle", NULL };
-static const char *mpdnext[]		= { "ncmpcpp", "next", NULL };
-static const char *mpdprev[]		= { "ncmpcpp", "prev", NULL };
-static const char *mpdstop[]		= { "ncmpcpp", "stop", NULL };
+static const char *mpdplay[]		= { "mpc", "toggle", NULL };
+static const char *mpdnext[]		= { "mpc", "next", NULL };
+static const char *mpdprev[]		= { "mpc", "prev", NULL };
+static const char *mpdstop[]		= { "mpc", "stop", NULL };
 
 /* key bindings */
 static Key keys[] = {
