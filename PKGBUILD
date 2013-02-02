@@ -9,8 +9,9 @@ depends=('libxinerama' 'pango')
 options=(zipman)
 provides=('dwm')
 conflicts=('dwm-pango')
-_source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz 
-		config.h)
+_source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
+		config.h
+		config.mk)
 _patches=(01-dwm-6.0-xft.diff
 					02-dwm-6.0-pertag2.diff
 					03-dwm-6.0-uselessgaps.diff
@@ -32,7 +33,7 @@ build() {
 
   cd $srcdir/$pkgname-$pkgver
   cp $srcdir/config.h config.h
-
+  cp $srcdir/config.mk config.mk
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 || return 1
   make PREFIX=/usr DESTDIR=$pkgdir install || return 1
 
@@ -41,6 +42,7 @@ build() {
 }
 md5sums=('8bb00d4142259beb11e13473b81c0857'
          'ca20c4bac2adc714304f44a32bb917f2'
+         '5480a497980b4ceace8634a825052247'
          '10115ccd48a28c7b6bc167257d0c0fb7'
          '0fd771ad51b80c3872c9080bd15f6eea'
          '98d34f02105cf2497d5d1db1b75bd317'
