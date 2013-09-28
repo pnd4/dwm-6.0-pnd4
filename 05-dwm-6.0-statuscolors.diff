@@ -95,7 +95,7 @@
 +        c=*ptr;
 +        *ptr=0;
 +            if( i ) {
-+            dc.w = selmon->ww - dc.x;
++            dc.w = mons->ww - dc.x;
 +            drawtext(buf, col, False);
 +            dc.x += textnw(buf, i);
 +            }
