@@ -19,7 +19,7 @@ static const char colors[NUMCOLORS][ColLast][9] = {
 	{ "#39ff14", "#dc143c", "#000000" }, // 3 = urgent -> red text, blk border, on blk
 	{ "#000000", "#1b8be0", "#000000" }, // 4 = occupied -> blue text, blk border, on blk
 };
-static const unsigned int statusmon = 0;        // On which monitor should the status appear
+static const unsigned int statusmon = 1;        // On which monitor should the status appear
 static const unsigned int systrayspacing = 3;   // Systray spacing
 static const unsigned int borderpx = 2;         // Border pixel of windows
 static const unsigned int gappx	= 35;	        // Gap pixel between windows
