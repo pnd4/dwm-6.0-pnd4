@@ -58,11 +58,11 @@ static const Rule rules[] = {
  * Monitor '1' is left, '0' is right, '-1' is either 
  * */
 	/*class			instance	title   tags mask	isfloating	monitor */
-    { "Navigator",  "Aurora",   NULL,   1 << 1,     False,       1},
+    { "Navigator",  "Aurora",   NULL,   1 << 1,     False,       0},
 	{ "Navigator",  "Firefox",  NULL,   1 << 1,		False,		 1},
 	{ "Navigator",  "Iceweasel",NULL,   1 << 1,		False,		 1},
 	{ "Chromium",	"chromium",	NULL,   1 << 1,	    False,		 0},
-	{ "Keepassx",   "keepassx",	NULL,   1 << 1,		False,		 0},
+	{ NULL,         "keepassc",	NULL,   1 << 1,		False,		 0},
 	{ NULL,			"weechat",  NULL,   1 << 2,		False,		 1},
 	{ NULL,			"ncmpcpp",	NULL,   1 << 3,		False,		 1},
 	{ "Smplayer",	"smplayer",	NULL,   1 << 3,		False,		 0},
@@ -92,6 +92,7 @@ static const char *dmenu[]			= { "dmenu_run", "-p", "(P!)", "-fn", font, "-nb", 
 static const char *term[]			= { "urxvtc", NULL };
 static const char *browser[]		= { "chromium", NULL };
 static const char *files[]			= { "spacefm", NULL };
+static const char *passlocker[]     = { "urxvtc", "-name", "keepassc", "-e", "keepassc", NULL };
 static const char *music[]			= { "urxvtc", "-name", "ncmpcpp", "-e", "ncmpcpp", NULL };
 static const char *irc[]		    = { "urxvtc", "-name", "weechat", "-e", "weechat-curses", NULL };
 static const char *scrot[]			= { "xfce4-screenshooter", NULL };
@@ -111,6 +112,7 @@ static Key keys[] = {
 	{ MODKEY,                   XK_p,						spawn,			{.v = dmenu } },
 	{ MODKEY,                   XK_e,			    		spawn,			{.v = files } },
 	{ MODKEY|ShiftMask,         XK_Return,	    			spawn,			{.v = term } },
+    { MODKEY,                   XK_F1,                      spawn,          {.v = passlocker } },
 	{ MODKEY,					XK_F2,						spawn,			{.v = browser } },
 	{ MODKEY,					XK_F3,						spawn,			{.v = irc } },
 	{ MODKEY,					XK_F4,						spawn,			{.v = music } },
