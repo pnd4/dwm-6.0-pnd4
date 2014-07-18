@@ -1,3 +1,4 @@
+# Maintainer: pnd4 <kevin[at]pnd4[dot]net>
 pkgname=dwm-pnd4
 pkgver=6.0
 pkgrel=1
@@ -5,7 +6,7 @@ pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org"
 arch=('x86_64')
 license=('GPL2')
-depends=('libxinerama')
+depends=('libxinerama' 'libxft')
 options=(zipman)
 provides=('dwm')
 conflicts=('dwm-pango')
