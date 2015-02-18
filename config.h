@@ -7,7 +7,7 @@
 /* appearance */
 
 /* font */
-//static const char font[] = "Inconsolata:style=bold:size=10:antialias=true:hinting=true" "," 
+//static const char font[] = "Inconsolata:style=bold:size=10:antialias=true:hinting=true" ","; 
 static const char font[] = "Tamsynmod:style=Regular";
 
 /* colors */
@@ -58,20 +58,17 @@ static const Rule rules[] = {
  * Monitor '1' is left, '0' is right, '-1' is either 
  * */
 	/*class			instance	title   tags mask	isfloating	monitor */
-    { "Navigator",  "Aurora",   NULL,   1 << 1,     False,       0},
+    { "DTA",        "Firefox",  NULL,   1 << 4,     False,       1},
 	{ "Navigator",  "Firefox",  NULL,   1 << 1,		False,		 1},
-	{ "Navigator",  "Iceweasel",NULL,   1 << 1,		False,		 1},
-	{ "Chromium",	"chromium",	NULL,   1 << 1,	    False,		 0},
+	{ "Chromium",	"Chromium",	NULL,   1 << 1,	    False,		 0},
 	{ NULL,         "keepassc",	NULL,   1 << 1,		False,		 0},
 	{ NULL,			"weechat",  NULL,   1 << 2,		False,		 1},
 	{ NULL,			"ncmpcpp",	NULL,   1 << 3,		False,		 1},
 	{ "Smplayer",	"smplayer",	NULL,   1 << 3,		False,		 0},
 	{ "Smtube",     "smtube",   NULL,   1 << 3,		False,		 0},
-	{ "MPlayer",	NULL,		NULL,   1 << 3,		True,		 0},
 	{ "feh",        "feh",		NULL,   1 << 4,		True,		 0},
 	{ "Gimp",		NULL,		NULL,   1 << 4,		False,		 0},
 	{ "Evince",		NULL,		NULL,   1 << 4,		False,		 0},
-	{ "hl_linux",	"hl_linux",	NULL,   1 << 3,		True,		 0},
 	{ "Steam",		"Steam",	NULL,   1 << 3,		True,		 0},
 };
 
