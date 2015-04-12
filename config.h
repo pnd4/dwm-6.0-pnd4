@@ -3,7 +3,6 @@
 */
 
 #include <X11/XF86keysym.h>
-
 /* appearance */
 
 /* font */
@@ -13,11 +12,11 @@ static const char font[] = "Tamsynmod:style=Regular";
 /* colors */
 #define NUMCOLORS 4
 static const char colors[NUMCOLORS][ColLast][9] = {
-	/* border   foreground  background */
-	{ "#000000", "#bbbbbb", "#000000" }, // 1 = normal -> grey text, blk border on blk
-	{ "#005577", "#000000", "#005577" }, // 2 = selected -> blk text, blue border, on blk
-	{ "#39ff14", "#dc143c", "#000000" }, // 3 = urgent -> red text, blk border, on blk
-	{ "#000000", "#1b8be0", "#000000" }, // 4 = occupied -> blue text, blk border, on blk
+	/* ColBorder, ColFG, ColBG          */
+	{ "#000000", "#bbbbbb", "#000000" }, // normal -> blk border, grey fg, blk bg
+	{ "#005577", "#000000", "#005577" }, // selected -> blue border, black fg, blue bg
+	{ "#39ff14", "#dc143c", "#000000" }, // urgent -> grn border, red fg, blk bg
+	{ "#000000", "#1b8be0", "#000000" }, // occupied -> blk border, blue fg, blk bg
 };
 static const unsigned int statusmon = 1;        // On which monitor should the status appear
 static const unsigned int systrayspacing = 3;   // Systray spacing
@@ -45,11 +44,11 @@ static const Layout layouts[] = {
 /* tagging */
 static const Tag tags[] = {
 	/*      name         layout mfact	nmaster */
-	{ " \u00B9 ",	&layouts[0], -1,		-1 },
+	{ " \u00B9 ",	&layouts[1], -1,		-1 },
 	{ " \u00AD ",	&layouts[1], -1,		 1 },
-	{ " \u00BA ",	&layouts[0], -1,		-1 },
-	{ " \u00E0 ",	&layouts[0], -1,		-1 },
-	{ " \u00B5 ",	&layouts[0], -1,		-1 },
+	{ " \u00BA ",	&layouts[1], -1,		-1 },
+	{ " \u00E0 ",	&layouts[1], -1,		-1 },
+	{ " \u00B5 ",	&layouts[1], -1,		-1 },
 };
 
 /* rules */
@@ -58,18 +57,16 @@ static const Rule rules[] = {
  * Monitor '1' is left, '0' is right, '-1' is either 
  * */
 	/*class			instance	title   tags mask	isfloating	monitor */
-    { "DTA",        "Firefox",  NULL,   1 << 4,     False,       1},
-	{ "Navigator",  "Firefox",  NULL,   1 << 1,		False,		 1},
-	{ "Chromium",	"Chromium",	NULL,   1 << 1,	    False,		 0},
-	{ NULL,         "keepassc",	NULL,   1 << 1,		False,		 0},
-	{ NULL,			"weechat",  NULL,   1 << 2,		False,		 1},
-	{ NULL,			"ncmpcpp",	NULL,   1 << 3,		False,		 1},
+    { NULL,         "DwmTerm",  NULL,   1 << 0,     False,       0},
+	//{ null,         "dwmweb",	NULL,   1 << 1,	    false,		 1},
+	{ "Chromium",   "Chromium", NULL,   1 << 1,	    False,		 1},
+	{ NULL,         "DwmPass",	NULL,   1 << 1,		False,		 0},
+	{ NULL,	        "DwmChat",  NULL,   1 << 2,		False,		 0},
+	{ NULL,	        "DwmMusic",	NULL,   1 << 3,		False,		 0},
 	{ "Smplayer",	"smplayer",	NULL,   1 << 3,		False,		 0},
 	{ "Smtube",     "smtube",   NULL,   1 << 3,		False,		 0},
 	{ "feh",        "feh",		NULL,   1 << 4,		True,		 0},
 	{ "Gimp",		NULL,		NULL,   1 << 4,		False,		 0},
-	{ "Evince",		NULL,		NULL,   1 << 4,		False,		 0},
-	{ "Steam",		"Steam",	NULL,   1 << 3,		True,		 0},
 };
 
 /* key definitions */
@@ -85,23 +82,23 @@ static const Rule rules[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenu[]			= { "dmenu_run", "-p", "(P!)", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char *term[]			= { "urxvtc", NULL };
-static const char *browser[]		= { "chromium", NULL };
-static const char *files[]			= { "spacefm", NULL };
-static const char *passlocker[]     = { "urxvtc", "-name", "keepassc", "-e", "keepassc", NULL };
-static const char *music[]			= { "urxvtc", "-name", "ncmpcpp", "-e", "ncmpcpp", NULL };
-static const char *irc[]		    = { "urxvtc", "-name", "weechat", "-e", "weechat-curses", NULL };
-static const char *scrot[]			= { "xfce4-screenshooter", NULL };
+static const char *dmenu[]			= { "dmenu_run", "-p", "[P!]", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[2][ColBG], "-sf", colors[2][ColBorder], NULL }; //grn sel, grey norm, on blk
+static const char *term[]			= { "urxvtc", "-name", "DwmTerm", NULL };
+static const char *browser[]		= { "chromium", "-name", NULL };
+static const char *files[]			= { "urxvtc", "-name", "DwmRanger", "-e", "ranger", NULL };
+static const char *passlocker[]     = { "urxvtc", "-name", "DwmPass", "-e", "keepassc", NULL };
+static const char *music[]			= { "urxvtc", "-name", "DwmMusic", "-e", "ncmpcpp", NULL };
+static const char *irc[]		    = { "urxvtc", "-name", "DwmChat", "-e", "weechat-curses", NULL };
+static const char *scrot[]			= { "scrot", "-s", NULL };
 //static const char *lock[]			= { "slock", NULL };
 //static const char *halt[]			= { "dmenu_shutdown", NULL };
 static const char *volup[]			= { "amixer", "-q", "sset", "Master", "5%+", "unmute", NULL };
 static const char *voldown[]		= { "amixer", "-q", "sset", "Master", "5%-", "unmute", NULL };
 static const char *volmute[]		= { "amixer", "-q", "sset", "Master", "toggle", NULL };
-static const char *mpdplay[]		= { "mpc", "play", NULL };
+static const char *mpdplay[]		= { "mpc", "toggle", NULL };
 static const char *mpdnext[]		= { "mpc", "next", NULL };
 static const char *mpdprev[]		= { "mpc", "prev", NULL };
-static const char *mpdstop[]		= { "mpc", "toggle", NULL };
+static const char *mpdstop[]		= { "mpc", "stop", NULL };
 
 /* key bindings */
 static Key keys[] = {
@@ -120,12 +117,12 @@ static Key keys[] = {
 	{ MODKEY,					XK_F11,						spawn,			{.v = voldown } },
 	{ MODKEY,					XK_F12,						spawn,			{.v = volup } },
 	{ MODKEY,					XK_Print,					spawn,			{.v = scrot } },
-	{ 0,						XF86XK_AudioRaiseVolume,	spawn,			{.v = volup } },
-	{ 0,						XF86XK_AudioLowerVolume,	spawn,			{.v = voldown } },
-	{ 0,						XF86XK_AudioMute,			spawn,			{.v = volmute } },
-	{ 0,						XF86XK_AudioPlay,			spawn,			{.v = mpdplay } },
-	{ 0,						XF86XK_AudioNext,			spawn,			{.v = mpdnext } },
-	{ 0,						XF86XK_AudioPrev,			spawn,			{.v = mpdprev } },
+	{ 0,						0x1008ff12,			        spawn,			{.v = volmute } },
+	{ 0,						0x1008ff11,	                spawn,			{.v = voldown } },
+	{ 0,						0x1008ff13,                	spawn,			{.v = volup } },
+	{ 0,						0x1008ff14,         		spawn,			{.v = mpdplay } },
+	{ 0,						0x1008ff16,                 spawn,			{.v = mpdprev } },
+	{ 0,						0x1008ff17,                 spawn,			{.v = mpdnext } },
 	{ 0,						XF86XK_AudioStop,			spawn,			{.v = mpdstop } },
 	{ MODKEY|ShiftMask,			XK_b,						togglebar,		{0} },
 	{ MODKEY|ShiftMask,			XK_q,						quit,			{0} },
@@ -139,7 +136,7 @@ static Key keys[] = {
 	{ MODKEY,					XK_bracketright,		    setmfact,		{.f = +0.05} },
 	{ MODKEY,					XK_equal,					incnmaster,		{.i = +1 } },
 	{ MODKEY,					XK_minus,					incnmaster,		{.i = -1 } },
-	{ MODKEY,					XK_space,					togglefloating, {0} },
+	{ MODKEY,					XK_grave,		        	togglefloating, {0} },
 	{ MODKEY,					XK_t,						setlayout,		{.v = &layouts[0] } },
 	{ MODKEY,					XK_b,						setlayout,		{.v = &layouts[1] } },
 	{ MODKEY,					XK_m,						setlayout,		{.v = &layouts[2] } },
