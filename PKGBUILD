@@ -20,9 +20,8 @@ _patches=(01-dwm-6.0-xft.diff
 		  06-dwm-6.0-occupiedcol.diff
 		  07-dwm-6.0-monocle_fixes.diff
 		  08-dwm-6.0-statusmon.diff
-		  09-dwm-6.0-attachaside.diff
-		  10-dwm-6.0-no_title.diff
-		  11-dwm-6.0-XKeycodeToKeysym_fix.diff
+		  09-dwm-6.0-no_title.diff
+		  10-dwm-6.0-XKeycodeToKeysym_fix.diff
           00-dwm-6.0-buildflags.diff)
 source=(${_source[@]} ${_patches[@]})
 
@@ -43,7 +42,7 @@ package() {
     install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
 }
 md5sums=('8bb00d4142259beb11e13473b81c0857'
-         'f3ff9c95035b153f7b01f1de22df16e6'
+         'd598720d1393fd71dda333e7b7de4b49'
          '10115ccd48a28c7b6bc167257d0c0fb7'
          '0fd771ad51b80c3872c9080bd15f6eea'
          '98d34f02105cf2497d5d1db1b75bd317'
@@ -52,7 +51,6 @@ md5sums=('8bb00d4142259beb11e13473b81c0857'
          '5ea175f007b04b82befa36d3c139db04'
          '9a189835b97574a22b21e0249e112ae4'
          '9bdd0c112f1575b69be2967a3c243137'
-         '540f33b708c230fbabac202dcc03ade1'
          'd87223a0c056e59a0dd6a5fba5d0c745'
          'cd20ba50cf16f2cbeea864f99214d485'
          'b8de5bdd45e3736cf2e6b0277301e196')
