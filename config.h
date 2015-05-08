@@ -82,7 +82,7 @@ static const Rule rules[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenu[]			= { "dmenu_run", "-p", "[P!]", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[2][ColBG], "-sf", colors[2][ColBorder], NULL }; //grn sel, grey norm, on blk
+static const char *dmenu[]			= { "dmenu_run", "-p", "[P!]", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[2][ColBG], "-sf", colors[2][ColBorder], NULL };
 static const char *term[]			= { "urxvtc", "-name", "DwmTerm", NULL };
 static const char *browser[]		= { "chromium", "-name", NULL };
 static const char *files[]			= { "urxvtc", "-name", "DwmRanger", "-e", "ranger", NULL };
@@ -117,11 +117,17 @@ static Key keys[] = {
 	{ MODKEY,					XK_F11,						spawn,			{.v = voldown } },
 	{ MODKEY,					XK_F12,						spawn,			{.v = volup } },
 	{ MODKEY,					XK_Print,					spawn,			{.v = scrot } },
+	{ 0,						XF86XK_AudioMute,           spawn,			{.v = volmute } },
 	{ 0,						0x1008ff12,			        spawn,			{.v = volmute } },
+	{ 0,						XF86XK_AudioLowerVolume,    spawn,			{.v = voldown } },
 	{ 0,						0x1008ff11,	                spawn,			{.v = voldown } },
+	{ 0,						XF86XK_AudioRaiseVolume,   	spawn,			{.v = volup } },
 	{ 0,						0x1008ff13,                	spawn,			{.v = volup } },
+	{ 0,						XF86XK_AudioPlay,   		spawn,			{.v = mpdplay } },
 	{ 0,						0x1008ff14,         		spawn,			{.v = mpdplay } },
+	{ 0,						XF86XK_AudioPrev,           spawn,			{.v = mpdprev } },
 	{ 0,						0x1008ff16,                 spawn,			{.v = mpdprev } },
+	{ 0,						XF86XK_AudioNext,           spawn,			{.v = mpdnext } },
 	{ 0,						0x1008ff17,                 spawn,			{.v = mpdnext } },
 	{ 0,						XF86XK_AudioStop,			spawn,			{.v = mpdstop } },
 	{ MODKEY|ShiftMask,			XK_b,						togglebar,		{0} },
