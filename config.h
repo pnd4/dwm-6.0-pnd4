@@ -23,7 +23,7 @@ static const unsigned int systrayspacing = 3;   // Systray spacing
 static const unsigned int borderpx = 2;         // Border pixel of windows
 static const unsigned int gappx	= 35;	        // Gap pixel between windows
 static const unsigned int snap = 25;	        // Snap pixel
-static const float opacity = 0.75;	            // Opacity of the statusbar (max 0.75)
+static const float opacity = 1;	            // Opacity of the statusbar (max 0.75)
 static const Bool showbar = True;	            // False means no bar
 static const Bool showsystray = True;	        // False means no systray
 static const Bool topbar = True;	            // False means bottom bar
@@ -57,7 +57,7 @@ static const Rule rules[] = {
  * Monitor '1' is left, '0' is right, '-1' is either 
  * */
 	/*class			instance	title   tags mask	isfloating	monitor */
-    { NULL,         "DwmTerm",  NULL,   1 << 0,     False,       0},
+    { NULL,         "DwmTerm",  NULL,   1 << 0,     False,       -1},
 	//{ null,         "dwmweb",	NULL,   1 << 1,	    false,		 1},
 	{ "Chromium",   "Chromium", NULL,   1 << 1,	    False,		 1},
 	{ NULL,         "DwmPass",	NULL,   1 << 1,		False,		 0},
@@ -85,9 +85,9 @@ static const Rule rules[] = {
 static const char *dmenu[]			= { "dmenu_run", "-p", "[P!]", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[2][ColBG], "-sf", colors[2][ColBorder], NULL };
 static const char *term[]			= { "urxvtc", "-name", "DwmTerm", NULL };
 static const char *browser[]		= { "chromium", "-name", NULL };
-static const char *files[]			= { "urxvtc", "-name", "DwmRanger", "-e", "ranger", NULL };
+static const char *files[]			= { "urxvt", "-name", "DwmRanger", "-depth", "0", "-shading", "0", "-e", "ranger", NULL };
 static const char *passlocker[]     = { "urxvtc", "-name", "DwmPass", "-e", "keepassc", NULL };
-static const char *music[]			= { "urxvtc", "-name", "DwmMusic", "-e", "ncmpcpp", NULL };
+static const char *music[]			= { "urxvtc", "-name", "DwmMusic", "-e", "ncmpcpp", "-s", "visualizer", "-S", "playlist", NULL };
 static const char *irc[]		    = { "urxvtc", "-name", "DwmChat", "-e", "weechat-curses", NULL };
 static const char *scrot[]			= { "scrot", "-s", NULL };
 //static const char *lock[]			= { "slock", NULL };
