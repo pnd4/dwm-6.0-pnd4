@@ -103,6 +103,22 @@
 +       col = dc.colors[ c-1 ];
 +       buf = ++ptr;
 +    }
+=======
++	while( *ptr ) {
++    	 for( i = 0; *ptr < 0 || *ptr > NUMCOLORS; i++, ptr++);
++        if( !*ptr ) break;
++        c=*ptr;
++        *ptr=0;
++            if( i ) {
++            dc.w = mons->ww - dc.x;
++            drawtext(buf, col, False);
++            dc.x += textnw(buf, i);
++            }
++        *ptr = c;
++        col = dc.colors[ c-1 ];
++        buf = ++ptr;
++        }
+>>>>>>> 15d05ac91be8bcd18eb1fb34835c6d251e1ee9dd
 +    drawtext(buf, col, False);
 +    dc.x = ox;
 +}

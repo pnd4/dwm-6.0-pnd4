@@ -57,6 +57,7 @@ static const Rule rules[] = {
 /* WM_CLASS     WM_CLASS    WM_NAME
  * Monitor '1' is left, '0' is right, '-1' is either 
  * */
+<<<<<<< HEAD
     /* class         instance    title   tags mask   isfloating  monitor */
     { NULL,         "DwmTerm",  NULL,   1 << 0,     False,      -1},
 //  { null,         "DwmWeb", NULL,   1 << 1,     false,      -1},
@@ -69,6 +70,19 @@ static const Rule rules[] = {
     { "feh",        "feh",      NULL,   1 << 4,     True,       -1},
     { "Gifview",    "gifview",	NULL,	1 << 4,	    False,      -1},
     { "Gimp",       NULL,       NULL,   1 << 4,     False,      -1},
+=======
+    /*class         instance    title   tags mask   isfloating  monitor */
+    { NULL,         "DwmTerm",  NULL,   1 << 0,     False,       -1},
+    //{ null,         "dwmweb", NULL,   1 << 1,     false,       1},
+    { "Chromium",   "Chromium", NULL,   1 << 1,     False,       1},
+    { NULL,         "DwmPass",  NULL,   1 << 1,     False,       0},
+    { NULL,         "DwmChat",  NULL,   1 << 2,     False,       0},
+    { NULL,         "DwmMusic", NULL,   1 << 3,     False,       0},
+    { "Smplayer",   "smplayer", NULL,   1 << 3,     False,       0},
+    { "Smtube",     "smtube",   NULL,   1 << 3,     False,       0},
+    { "feh",        "feh",      NULL,   1 << 4,     True,        0},
+    { "Gimp",       NULL,       NULL,   1 << 4,     False,       0},
+>>>>>>> 15d05ac91be8bcd18eb1fb34835c6d251e1ee9dd
 };
 
 /* key definitions */
@@ -86,13 +100,21 @@ static const Rule rules[] = {
 /* commands */
 static const char *dmenu[]          = { "dmenu_run", "-p", "[P!]", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[2][ColBG], "-sf", colors[2][ColBorder], NULL };
 static const char *term[]           = { "urxvtc", "-name", "DwmTerm", NULL };
+<<<<<<< HEAD
 static const char *browser[]        = { "chromium", NULL };
+=======
+static const char *browser[]        = { "chromium", "-name", NULL };
+>>>>>>> 15d05ac91be8bcd18eb1fb34835c6d251e1ee9dd
 static const char *files[]          = { "urxvt", "-name", "DwmRanger", "-depth", "0", "-shading", "0", "-e", "ranger", NULL };
 static const char *passlocker[]     = { "urxvtc", "-name", "DwmPass", "-e", "keepassc", NULL };
 static const char *music[]          = { "urxvtc", "-name", "DwmMusic", "-e", "ncmpcpp", "-s", "visualizer", "-S", "playlist", NULL };
 static const char *irc[]            = { "urxvtc", "-name", "DwmChat", "-e", "weechat-curses", NULL };
 static const char *scrot[]          = { "scrot", "-s", NULL };
+<<<<<<< HEAD
 static const char *lock[]           = { "slock", NULL };
+=======
+//static const char *lock[]         = { "slock", NULL };
+>>>>>>> 15d05ac91be8bcd18eb1fb34835c6d251e1ee9dd
 //static const char *halt[]         = { "dmenu_shutdown", NULL };
 static const char *volup[]          = { "amixer", "-q", "sset", "Master", "5%+", "unmute", NULL };
 static const char *voldown[]        = { "amixer", "-q", "sset", "Master", "5%-", "unmute", NULL };
@@ -116,8 +138,11 @@ static Key keys[] = {
     { MODKEY,                   XK_F6,                      spawn,          {.v = mpdnext } },
     { MODKEY,                   XK_F7,                      spawn,          {.v = mpdprev } },
     { MODKEY,                   XK_F8,                      spawn,          {.v = mpdstop } },
+<<<<<<< HEAD
     { MODKEY,                   XK_F9,                      spawn,          {.v = lock } },
     { MODKEY,                   XK_Num_Lock,                spawn,          {.v = lock } },
+=======
+>>>>>>> 15d05ac91be8bcd18eb1fb34835c6d251e1ee9dd
     { MODKEY,                   XK_F11,                     spawn,          {.v = voldown } },
     { MODKEY,                   XK_F12,                     spawn,          {.v = volup } },
     { MODKEY,                   XK_Print,                   spawn,          {.v = scrot } },
