@@ -12,7 +12,8 @@ provides=('dwm')
 conflicts=('dwm-pango')
 _source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         config.h)
-_patches=(01-dwm-6.0-xft.diff
+_patches=(00-dwm-6.0-buildflags.diff
+          01-dwm-6.0-xft.diff
 		  02-dwm-6.0-pertag2.diff
 		  03-dwm-6.0-uselessgaps.diff
 		  04-dwm-6.0-systray.diff
@@ -21,8 +22,7 @@ _patches=(01-dwm-6.0-xft.diff
 		  07-dwm-6.0-monocle_fixes.diff
 		  08-dwm-6.0-statusmon.diff
 		  09-dwm-6.0-no_title.diff
-		  10-dwm-6.0-XKeycodeToKeysym_fix.diff
-          00-dwm-6.0-buildflags.diff)
+		  10-dwm-6.0-XKeycodeToKeysym_fix.diff)
 source=(${_source[@]} ${_patches[@]})
 
 build() {
@@ -42,15 +42,15 @@ package() {
     install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
 }
 md5sums=('8bb00d4142259beb11e13473b81c0857'
-         'f728c2508582bf3fd7c6d06bb2192904'
+         'a12212cf943284bce378c689ac5e5763'
+         'b8de5bdd45e3736cf2e6b0277301e196'
          '10115ccd48a28c7b6bc167257d0c0fb7'
          '0fd771ad51b80c3872c9080bd15f6eea'
          '98d34f02105cf2497d5d1db1b75bd317'
          '6a0f657a18b77764fdd70a819b78412f'
-         'be40c0edf9b6b77377cc9fd0df30329f'
+         '80ed7eb56ec61f2c8a261ce7eb944120'
          '5ea175f007b04b82befa36d3c139db04'
          '9a189835b97574a22b21e0249e112ae4'
          '9bdd0c112f1575b69be2967a3c243137'
          'd87223a0c056e59a0dd6a5fba5d0c745'
-         'cd20ba50cf16f2cbeea864f99214d485'
-         'b8de5bdd45e3736cf2e6b0277301e196')
+         'cd20ba50cf16f2cbeea864f99214d485')
